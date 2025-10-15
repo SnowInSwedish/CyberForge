@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  cyberpunk-web:
+    build: .
+    container_name: cyberpunk-website
+    ports:
+      - "8089:80"
+    restart: unless-stopped
+    volumes:
+      # Optional: mount video file if you want to update it without rebuilding
+      - ./video.mp4:/usr/share/nginx/html/video.mp4:ro
+    networks:
+      - cyberpunk-network
+
+networks:
+  cyberpunk-network:
+    driver: bridge
